@@ -17,6 +17,14 @@
 		684C59DA2839181100102994 /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = 684C59D92839181100102994 /* example.json */; };
 		684C59DC2839183700102994 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684C59DB2839183700102994 /* AppEnvironment.swift */; };
 		684C59DF283918D900102994 /* RestaurantListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684C59DE283918D900102994 /* RestaurantListModule.swift */; };
+		684C59E128393C3C00102994 /* RestaurantListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684C59E028393C3C00102994 /* RestaurantListInteractor.swift */; };
+		684C59E328393C7E00102994 /* StorageClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684C59E228393C7E00102994 /* StorageClient.swift */; };
+		684C59E628393CB100102994 /* RestauransCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684C59E528393CB100102994 /* RestauransCodable.swift */; };
+		684C59E828393D0200102994 /* RestaurantCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684C59E728393D0200102994 /* RestaurantCodable.swift */; };
+		684C59EA28393DF800102994 /* SortingValuesCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684C59E928393DF800102994 /* SortingValuesCodable.swift */; };
+		684C59EF28394CC400102994 /* Restaurants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684C59EE28394CC400102994 /* Restaurants.swift */; };
+		684C59F128394CEA00102994 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684C59F028394CEA00102994 /* Restaurant.swift */; };
+		684C59F328394D3F00102994 /* SortingValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684C59F228394D3F00102994 /* SortingValues.swift */; };
 		6882F114283914FD003F64B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6882F113283914FD003F64B4 /* AppDelegate.swift */; };
 		6882F11D28391505003F64B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6882F11C28391505003F64B4 /* Assets.xcassets */; };
 		6882F12028391505003F64B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6882F11E28391505003F64B4 /* LaunchScreen.storyboard */; };
@@ -51,6 +59,14 @@
 		684C59D92839181100102994 /* example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example.json; sourceTree = "<group>"; };
 		684C59DB2839183700102994 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		684C59DE283918D900102994 /* RestaurantListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListModule.swift; sourceTree = "<group>"; };
+		684C59E028393C3C00102994 /* RestaurantListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListInteractor.swift; sourceTree = "<group>"; };
+		684C59E228393C7E00102994 /* StorageClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageClient.swift; sourceTree = "<group>"; };
+		684C59E528393CB100102994 /* RestauransCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestauransCodable.swift; sourceTree = "<group>"; };
+		684C59E728393D0200102994 /* RestaurantCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCodable.swift; sourceTree = "<group>"; };
+		684C59E928393DF800102994 /* SortingValuesCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingValuesCodable.swift; sourceTree = "<group>"; };
+		684C59EE28394CC400102994 /* Restaurants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurants.swift; sourceTree = "<group>"; };
+		684C59F028394CEA00102994 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		684C59F228394D3F00102994 /* SortingValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingValues.swift; sourceTree = "<group>"; };
 		6882F110283914FD003F64B4 /* RestorauntsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RestorauntsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6882F113283914FD003F64B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6882F11C28391505003F64B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -124,13 +140,46 @@
 		684C59D42839161300102994 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				684C59D82839181100102994 /* Storage */,
 				684C59DB2839183700102994 /* AppEnvironment.swift */,
 				40002A2745BA292145F1993C /* Router.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
 		};
-		684C59D82839181100102994 /* Data */ = {
+		684C59D82839181100102994 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				684C59EB28394C0400102994 /* Data */,
+				684C59E428393CA000102994 /* Entities */,
+				684C59E228393C7E00102994 /* StorageClient.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		684C59DD283918B500102994 /* RestaurantListModule */ = {
+			isa = PBXGroup;
+			children = (
+				684C59EC28394CA800102994 /* Interactor */,
+				40002E4102FFEC53BE1F12F6 /* View */,
+				684C59DE283918D900102994 /* RestaurantListModule.swift */,
+				40002F0541085DF03D3F516C /* RestaurantListPresenter.swift */,
+				40002734EFFA5D2A20ED8504 /* RestaurantListDataSource.swift */,
+			);
+			path = RestaurantListModule;
+			sourceTree = "<group>";
+		};
+		684C59E428393CA000102994 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				684C59E528393CB100102994 /* RestauransCodable.swift */,
+				684C59E728393D0200102994 /* RestaurantCodable.swift */,
+				684C59E928393DF800102994 /* SortingValuesCodable.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		684C59EB28394C0400102994 /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				684C59D92839181100102994 /* example.json */,
@@ -138,15 +187,23 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		684C59DD283918B500102994 /* RestaurantListModule */ = {
+		684C59EC28394CA800102994 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
-				684C59DE283918D900102994 /* RestaurantListModule.swift */,
-				40002F0541085DF03D3F516C /* RestaurantListPresenter.swift */,
-				40002734EFFA5D2A20ED8504 /* RestaurantListDataSource.swift */,
-				40002E4102FFEC53BE1F12F6 /* View */,
+				684C59ED28394CB000102994 /* Entities */,
+				684C59E028393C3C00102994 /* RestaurantListInteractor.swift */,
 			);
-			path = RestaurantListModule;
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		684C59ED28394CB000102994 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				684C59EE28394CC400102994 /* Restaurants.swift */,
+				684C59F028394CEA00102994 /* Restaurant.swift */,
+				684C59F228394D3F00102994 /* SortingValues.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		6882F107283914FD003F64B4 = {
@@ -171,7 +228,6 @@
 		6882F112283914FD003F64B4 /* RestorauntsApp */ = {
 			isa = PBXGroup;
 			children = (
-				684C59D82839181100102994 /* Data */,
 				684C59D42839161300102994 /* Shared */,
 				684C59D2283915E200102994 /* Modules */,
 				6882F113283914FD003F64B4 /* AppDelegate.swift */,
@@ -321,15 +377,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				684C59F328394D3F00102994 /* SortingValues.swift in Sources */,
 				6882F114283914FD003F64B4 /* AppDelegate.swift in Sources */,
 				684C59DF283918D900102994 /* RestaurantListModule.swift in Sources */,
 				684C59DC2839183700102994 /* AppEnvironment.swift in Sources */,
 				400028502117CD602DD89092 /* RestaurantListPresenter.swift in Sources */,
 				40002A9BD2EBF703143555C0 /* RestaurantListDataSource.swift in Sources */,
+				684C59E128393C3C00102994 /* RestaurantListInteractor.swift in Sources */,
 				400029CD8B9F276F9A461D83 /* RestaurantListViewController.swift in Sources */,
+				684C59EA28393DF800102994 /* SortingValuesCodable.swift in Sources */,
+				684C59EF28394CC400102994 /* Restaurants.swift in Sources */,
+				684C59E628393CB100102994 /* RestauransCodable.swift in Sources */,
 				400027445F1681C41C443AEB /* RestaurantListViewModel.swift in Sources */,
+				684C59E828393D0200102994 /* RestaurantCodable.swift in Sources */,
 				4000266FB5353CFBECF822C0 /* RestaurantListCellViewModel.swift in Sources */,
 				40002C0B03EBEEC67E41C0C0 /* RestaurantListSectionViewModel.swift in Sources */,
+				684C59F128394CEA00102994 /* Restaurant.swift in Sources */,
+				684C59E328393C7E00102994 /* StorageClient.swift in Sources */,
 				40002A4185C7E7A405C8894C /* Router.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

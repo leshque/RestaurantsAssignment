@@ -4,18 +4,18 @@
 
 import UIKit
 
-protocol RestaurantListViewProtocol {
+protocol RestaurantListViewProtocol: AnyObject {
 
-    func render(viewModel: RestaurantListViewModel) {
+    func render(viewModel: RestaurantListViewModel)
 
 }
 
-class RestaurantListViewController: UIViewController, RestaurantListViewProtocol {
+    class RestaurantListViewController: UIViewController, RestaurantListViewProtocol, UISearchBarDelegate {
 
     // MARK: Dependencies
 
     private let presenter: RestaurantListPresenterProtocol
-    private let dataSource: RestaurantListDataSource
+    private let dataSource: RestaurantListDataSourceProtocol
 
     // MARK: UI
 
@@ -76,16 +76,14 @@ class RestaurantListViewController: UIViewController, RestaurantListViewProtocol
 
     }
 
-    // MARK: RepoListViewProtocol
+    // MARK: RestaurantListViewProtocol
 
     func render(viewModel: RestaurantListViewModel) {
         onSearch = viewModel.actions.onSearch
         dataSource.render(
                 tableView: tableView,
-                cellViewModels: viewModel.repos
+                sections: viewModel.sections
         )
     }
-
-
 
 }

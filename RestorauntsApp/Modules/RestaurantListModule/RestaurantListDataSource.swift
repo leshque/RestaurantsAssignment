@@ -10,7 +10,7 @@ protocol RestaurantListDataSourceProtocol: UITableViewDataSource, UITableViewDel
 
 }
 
-class RestaurantListDataSource: RestaurantListDataSourceProtocol {
+class RestaurantListDataSource: NSObject, RestaurantListDataSourceProtocol {
 
     private var sections: [RestaurantListSectionViewModel] = [RestaurantListSectionViewModel]()
     private var tableView: UITableView?
@@ -34,14 +34,14 @@ class RestaurantListDataSource: RestaurantListDataSourceProtocol {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "BasicCell") else {
             return UITableViewCell()
         }
-        cell.textLabel?.text = sections[indexPath.section].items[indexPath.row].title
+//        cell.textLabel?.text = sections[indexPath.section].items[indexPath.row]
         return cell
     }
 
     // MARK: UITableViewDelegate
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let viewModel = sections[indexPath.section].items[indexPath.row]
+//        let viewModel = sections[indexPath.section].items[indexPath.row]
         //viewModel.onTap
     }
 

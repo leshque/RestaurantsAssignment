@@ -11,20 +11,15 @@ import UIKit
 
 protocol RestaurantListModuleProtocol {    
 
-    func getView() -> UIViewController
+    func getView() -> UINavigationController
 
 }
 
 class RestaurantListModule: RestaurantListModuleProtocol {
     
-    func getView() -> UIViewController {
-        let vc = RestaurantListViewController()
-        return vc
-    }
-
     func getView() -> UINavigationController {
         let presenter = presenter()
-        let repoVC = RestaurantListViewProtocol(
+        let repoVC = RestaurantListViewController(
                 presenter: presenter,
                 dataSource: RestaurantListDataSource()
         )
@@ -33,12 +28,12 @@ class RestaurantListModule: RestaurantListModuleProtocol {
         return navController
     }
 
-    func presenter() -> RepoListPresenter {
-        RepoListPresenter(interactor: interactor())
+    func presenter() -> RestaurantListPresenter {
+        RestaurantListPresenter(interactor: interactor())
     }
 
-    func interactor() -> RepoListInteractorProtocol {
-        RepoListInteractor(networkClient: AppEnvironment.shared.networkClient)
+    func interactor() -> RestaurantListInteractorProtocol {
+        RestaurantListInteractor(storageClient: AppEnvironment.shared.storageClient)
     }
     
 }

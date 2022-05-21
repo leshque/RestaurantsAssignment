@@ -4,7 +4,7 @@
 
 import Foundation
 
-class RestaurantListSectionViewModel {
+struct RestaurantListSectionViewModel {
 
     let items: [RestaurantListCellViewModel]
 

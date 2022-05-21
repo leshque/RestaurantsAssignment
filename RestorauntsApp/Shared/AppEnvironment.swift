@@ -10,5 +10,7 @@ import Foundation
 class AppEnvironment {
     
     static let shared: AppEnvironment = AppEnvironment()
+
+    lazy var router: RouterProtocol = Router()
     
 }

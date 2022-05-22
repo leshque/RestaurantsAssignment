@@ -61,6 +61,4 @@ class RestaurantListFooterView: UIView, RestaurantListFooterViewProtocol {
         sortByButton.setTitle(viewModel.buttonTitle, for: .normal)
     }
     
-    
-    
 }

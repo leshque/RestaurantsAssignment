@@ -68,7 +68,7 @@ class RestaurantListPresenter: RestaurantListPresenterProtocol {
     
     
     func viewDidLoad() {
-        view?.render(viewModel: initialViewModel())
+//        view?.render(viewModel: initialViewModel())
         searchRestaurants(
             query: "",
             sortOption: sortOption,
@@ -81,7 +81,8 @@ class RestaurantListPresenter: RestaurantListPresenterProtocol {
         view?.render(
             viewModel: self.viewModelMapper.mapRestaurants(
                 restaurants,
-                actions: getActions()
+                actions: getActions(),
+                sortOption: sortOption
             )
         )
     }
@@ -106,21 +107,6 @@ class RestaurantListPresenter: RestaurantListPresenterProtocol {
         )
     }
         
-}
-
-extension RestaurantListPresenter {
-    
-    func initialViewModel() -> RestaurantListViewModel {
-        RestaurantListViewModel(
-            actions: getActions(),
-            sections: [RestaurantListSectionViewModel(items: [])],
-            footerViewModel: RestaurantListFooterViewModel(
-                buttonTitle: "Sorted by: \(sortOption.title)",
-                actions: RestaurantListFooterViewModel.Actions(onSortSelectTapped: onSortSelectTapped)
-            )
-        )
-    }
-    
 }
 
 extension RestaurantListPresenter {

@@ -11,7 +11,8 @@ protocol RestaurantListViewModelMapperProtocol {
     
     func mapRestaurants(
         _ restaurants: Restaurants,
-        actions: RestaurantListActions
+        actions: RestaurantListActions,
+        sortOption: RestaurantListSortOption
     ) -> RestaurantListViewModel
     
 }
@@ -20,7 +21,8 @@ class RestaurantListViewModelMapper: RestaurantListViewModelMapperProtocol {
     
     func mapRestaurants(
         _ restaurants: Restaurants,
-        actions: RestaurantListActions
+        actions: RestaurantListActions,
+        sortOption: RestaurantListSortOption
     ) -> RestaurantListViewModel {
         RestaurantListViewModel(
             actions: actions,
@@ -31,13 +33,19 @@ class RestaurantListViewModelMapper: RestaurantListViewModelMapperProtocol {
                     }
                 )
             ],
-            footerViewModel: mapFooterViewModel(actions: actions)            
+            footerViewModel: mapFooterViewModel(
+                actions: actions,
+                sortOption: sortOption
+            )
         )
     }
     
-    private func mapFooterViewModel(actions: RestaurantListActions) -> RestaurantListFooterViewModel {
+    private func mapFooterViewModel(
+        actions: RestaurantListActions,
+        sortOption: RestaurantListSortOption
+    ) -> RestaurantListFooterViewModel {
         RestaurantListFooterViewModel(
-            buttonTitle: "Sorted by: !231231213212",
+            buttonTitle: "Sorted by: \(sortOption.title)",
             actions: RestaurantListFooterViewModel.Actions(onSortSelectTapped: actions.onSortSelectTapped)
         )
     }

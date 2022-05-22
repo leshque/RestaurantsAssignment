@@ -17,7 +17,7 @@ struct Restaurant {
 
 extension Restaurant {
     
-    enum Status {
+    enum Status: Comparable {
 
         case open
         case orderAhead

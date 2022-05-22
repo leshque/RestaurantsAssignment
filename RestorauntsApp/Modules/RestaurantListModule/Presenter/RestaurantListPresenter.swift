@@ -29,34 +29,46 @@ class RestaurantListPresenter: RestaurantListPresenterProtocol {
     lazy var onSearch: (String) -> () = { [weak self] query in
         guard let self = self else { return }
         
-        //        self.workItem?.cancel()
-        //
-        //        let searchWorkItem = DispatchWorkItem {
-        //            self.searchRepos(query: query) { result in
-        //                switch result {
-        //                case .success(let repositoriesDTO):
-        //                    self.view?.render(viewModel: self.viewModel(from: repositoriesDTO))
-        //                case .failure(_):
-        //                    self.view?.render(viewModel: self.initialViewModel())
-        //                }
-        //            }
-        //        }
-        //
-        //        self.workItem = searchWorkItem
-        //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: searchWorkItem)
+        self.workItem?.cancel()
+        
+        let searchWorkItem = DispatchWorkItem { [weak self] in
+            guard let self = self else { return }
+            self.searchRestaurants(
+                query: query,
+                completion: self.renderRestaurants
+            )
+        }
+        
+        self.workItem = searchWorkItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: searchWorkItem)
     }
     
     func viewDidLoad() {
         view?.render(viewModel: initialViewModel())
-        interactor.loadData { [weak self] restaurants in
-            print("we've got some restaurants: \(restaurants.restaurants.count)")
-            guard let self = self else { return }
-            self.view?.render(
-                viewModel: self.viewModelMapper.mapRestaurants(
-                    restaurants,
-                    actions: getActions()
-                )
+        searchRestaurants(query: "", completion: renderRestaurants)
+    }
+    
+    private func renderRestaurants(_ restaurants: Restaurants) {
+        print("we've got some restaurants: \(restaurants.restaurants.count)")
+        
+        view?.render(
+            viewModel: self.viewModelMapper.mapRestaurants(
+                restaurants,
+                actions: getActions()
             )
+        )
+    }
+    
+    private func searchRestaurants(
+        query: String,
+        completion: (Restaurants) -> ()
+    ) {
+        interactor.loadData (
+            searchQuery: query,
+            sortBy: \Restaurant.name,
+            sortOrder: .ascending
+        ) { restaurants in
+            completion(restaurants)
         }
     }
     

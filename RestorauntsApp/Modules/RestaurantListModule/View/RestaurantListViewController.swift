@@ -10,7 +10,7 @@ protocol RestaurantListViewProtocol: AnyObject {
 
 }
 
-    class RestaurantListViewController: UIViewController, RestaurantListViewProtocol, UISearchBarDelegate {
+class RestaurantListViewController: UIViewController, RestaurantListViewProtocol {
 
     // MARK: Dependencies
 
@@ -28,7 +28,7 @@ protocol RestaurantListViewProtocol: AnyObject {
     lazy var searchBar: UISearchBar = {
         let bar = UISearchBar()
         bar.translatesAutoresizingMaskIntoConstraints = false
-        bar.placeholder = "Enter Repo name..."
+        bar.placeholder = "Enter Restaurant name..."
         return bar
     }()
 
@@ -87,3 +87,12 @@ protocol RestaurantListViewProtocol: AnyObject {
     }
 
 }
+
+extension RestaurantListViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        onSearch(searchText)
+    }
+    
+}
+

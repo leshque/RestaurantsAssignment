@@ -14,11 +14,14 @@ class RestaurantListPresenter: RestaurantListPresenterProtocol {
     
     weak var view: RestaurantListViewProtocol?
     let interactor: RestaurantListInteractorProtocol
+    let viewModelMapper: RestaurantListViewModelMapperProtocol
     
     init(
-        interactor: RestaurantListInteractorProtocol
+        interactor: RestaurantListInteractorProtocol,
+        viewModelMapper: RestaurantListViewModelMapperProtocol
     ) {
         self.interactor = interactor
+        self.viewModelMapper = viewModelMapper
     }
     
     private var workItem: DispatchWorkItem?
@@ -45,9 +48,20 @@ class RestaurantListPresenter: RestaurantListPresenterProtocol {
     
     func viewDidLoad() {
         view?.render(viewModel: initialViewModel())
-        interactor.loadData { restaurants in
+        interactor.loadData { [weak self] restaurants in
             print("we've got some restaurants: \(restaurants.restaurants.count)")
+            guard let self = self else { return }
+            self.view?.render(
+                viewModel: self.viewModelMapper.mapRestaurants(
+                    restaurants,
+                    actions: getActions()
+                )
+            )
         }
+    }
+    
+    private func getActions() -> RestaurantListActions {
+        RestaurantListActions(onSearch: onSearch)
     }
     
     //    private func searchRepos(
@@ -73,7 +87,7 @@ extension RestaurantListPresenter {
     
     func initialViewModel() -> RestaurantListViewModel {
         RestaurantListViewModel(
-            actions: RestaurantListViewModel.Actions(onSearch: onSearch),
+            actions: getActions(),
             sections: [RestaurantListSectionViewModel(items: [])]
         )
     }
@@ -81,41 +95,5 @@ extension RestaurantListPresenter {
     //    func errorViewModel() -> RestaurantListViewModel {
     //        RestaurantListViewModel(actions: RestaurantListViewModel.Actions(onSearch: onSearch), repos: [BasicCellViewModel(title: "Error fetching Repos", onTap: { })])
     //    }
-    
-}
-
-extension RestaurantListPresenter {
-    
-    private func mapRestaurants(_ restaurants: Restaurants) -> RestaurantListViewModel {
-        RestaurantListViewModel(
-            actions: RestaurantListViewModel.Actions(onSearch: onSearch),
-            sections: [
-                RestaurantListSectionViewModel(
-                    items: restaurants.restaurants.map {
-                        self.mapRestaurant($0)
-                    }
-                )
-            ]
-        )
-    }
-    
-    private func mapRestaurant(_ restaurant: Restaurant) -> RestaurantListCellViewModel {
-        RestaurantListCellViewModel(
-            name: restaurant.name,
-            status: mapStatus(restaurant.status),
-            sortTitle: "Sort title?",
-            sortValue: "Sort value?")
-    }
-    
-    private func mapStatus(_ status: Restaurant.Status) -> RestaurantListCellViewModel.Status {
-        switch status {
-        case .open:
-            return .open
-        case .orderAhead:
-            return .orderAhead
-        case .closed:
-            return .closed
-        }
-    }
     
 }

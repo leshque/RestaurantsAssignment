@@ -29,7 +29,10 @@ class RestaurantListModule: RestaurantListModuleProtocol {
     }
 
     func presenter() -> RestaurantListPresenter {
-        RestaurantListPresenter(interactor: interactor())
+        RestaurantListPresenter(
+            interactor: interactor(),
+            viewModelMapper: RestaurantListViewModelMapper()
+        )
     }
 
     func interactor() -> RestaurantListInteractorProtocol {

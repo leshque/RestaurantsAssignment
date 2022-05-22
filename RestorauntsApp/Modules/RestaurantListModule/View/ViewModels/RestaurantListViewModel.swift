@@ -6,13 +6,13 @@ import Foundation
 
 struct RestaurantListViewModel {
 
-    struct Actions {
-
-        let onSearch: (String) -> ()
-
-    }
-
-    let actions: Actions
+    let actions: RestaurantListActions
     let sections: [RestaurantListSectionViewModel]
+
+}
+
+struct RestaurantListActions {
+
+    let onSearch: (String) -> ()
 
 }

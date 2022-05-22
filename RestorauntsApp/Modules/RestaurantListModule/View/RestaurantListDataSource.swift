@@ -18,7 +18,7 @@ class RestaurantListDataSource: NSObject, RestaurantListDataSourceProtocol {
     func render(tableView: UITableView, sections: [RestaurantListSectionViewModel]) {
         self.sections = sections
         self.tableView = tableView
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "BasicCell")
+        tableView.register(RestaurauntListTableCellView.self, forCellReuseIdentifier: RestaurauntListTableCellView.reuseIdentifier)
         tableView.dataSource = self
         tableView.reloadData()
 
@@ -31,10 +31,10 @@ class RestaurantListDataSource: NSObject, RestaurantListDataSourceProtocol {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BasicCell") else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: RestaurauntListTableCellView.reuseIdentifier) as? RestaurauntListTableCellView else {
             return UITableViewCell()
         }
-//        cell.textLabel?.text = sections[indexPath.section].items[indexPath.row]
+        cell.render(sections[indexPath.section].items[indexPath.row]) 
         return cell
     }
 

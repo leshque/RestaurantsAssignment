@@ -9,12 +9,19 @@ import Foundation
 
 protocol RestaurantListInteractorProtocol {
     
+//    func loadData<T: Comparable>(
+//        searchQuery: String,
+//        sortBy: KeyPath<Restaurant, T>,
+//        sortOrder: SortOrder,
+//        completion: (Restaurants) -> Void
+//    )
+  
     func loadData<T: Comparable>(
         searchQuery: String,
-        sortBy: KeyPath<Restaurant, T>,
-        sortOrder: SortOrder,
+        sortSettings: SortSettings<T>,
         completion: (Restaurants) -> Void
     )
+
     
 }
 
@@ -28,8 +35,7 @@ class RestaurantListInteractor: RestaurantListInteractorProtocol {
     
     func loadData<T: Comparable>(
         searchQuery: String,
-        sortBy: KeyPath<Restaurant, T>,
-        sortOrder: SortOrder,
+        sortSettings: SortSettings<T>,
         completion: (Restaurants) -> Void
     ) {
         let restaurantsCodable = storageClient.getRestaurants()
@@ -39,8 +45,8 @@ class RestaurantListInteractor: RestaurantListInteractorProtocol {
         let restaurantsFiltered = restaurantsDTO.restaurants.filter {
             searchQuery == "" ? true : $0.name.contains(searchQuery)
         }.sorted(
-            using: [.keyPath(\.status), .keyPath(sortBy)],
-            order: sortOrder
+            using: [.keyPath(\.status), .keyPath(sortSettings.sortBy)],
+            order: sortSettings.sortOrder
         )
         completion(Restaurants(restaurants: restaurantsFiltered))
     }

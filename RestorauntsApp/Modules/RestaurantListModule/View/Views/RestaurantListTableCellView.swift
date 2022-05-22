@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class RestaurauntListTableCellView: UITableViewCell {
+class RestaurantListTableCellView: UITableViewCell {
     
     static let reuseIdentifier = "RestaurauntListTableCellView"
     

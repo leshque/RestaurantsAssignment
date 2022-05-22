@@ -30,10 +30,18 @@ class RestaurantListViewModelMapper: RestaurantListViewModelMapperProtocol {
                         self.mapRestaurant($0)
                     }
                 )
-            ]
+            ],
+            footerViewModel: mapFooterViewModel(actions: actions)            
         )
     }
     
+    private func mapFooterViewModel(actions: RestaurantListActions) -> RestaurantListFooterViewModel {
+        RestaurantListFooterViewModel(
+            buttonTitle: "Sorted by: !231231213212",
+            actions: RestaurantListFooterViewModel.Actions(onSortSelectTapped: actions.onSortSelectTapped)
+        )
+    }
+ 
     func mapRestaurant(_ restaurant: Restaurant) -> RestaurantListCellViewModel {
         RestaurantListCellViewModel(
             name: restaurant.name,

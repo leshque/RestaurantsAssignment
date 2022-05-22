@@ -8,11 +8,13 @@ struct RestaurantListViewModel {
 
     let actions: RestaurantListActions
     let sections: [RestaurantListSectionViewModel]
+    let footerViewModel: RestaurantListFooterViewModel
 
 }
 
 struct RestaurantListActions {
 
-    let onSearch: (String) -> ()
+    let onSearch: (String) -> Void
+    let onSortSelectTapped: () -> Void
 
 }

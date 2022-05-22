@@ -5,4 +5,16 @@
 import Foundation
 
 struct RestaurantListCellViewModel {
+    
+    enum Status {
+        case open
+        case orderAhead
+        case closed
+    }
+    
+    let name: String
+    let status: Status
+    let sortTitle: String
+    let sortValue: String
+    
 }

@@ -160,10 +160,10 @@
 		684C59DD283918B500102994 /* RestaurantListModule */ = {
 			isa = PBXGroup;
 			children = (
+				688A0BF0283A3D4D0037D313 /* Presenter */,
 				684C59EC28394CA800102994 /* Interactor */,
 				40002E4102FFEC53BE1F12F6 /* View */,
 				684C59DE283918D900102994 /* RestaurantListModule.swift */,
-				40002F0541085DF03D3F516C /* RestaurantListPresenter.swift */,
 				40002734EFFA5D2A20ED8504 /* RestaurantListDataSource.swift */,
 			);
 			path = RestaurantListModule;
@@ -244,6 +244,14 @@
 				6882F12A28391505003F64B4 /* RestorauntsAppTests.swift */,
 			);
 			path = RestorauntsAppTests;
+			sourceTree = "<group>";
+		};
+		688A0BF0283A3D4D0037D313 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				40002F0541085DF03D3F516C /* RestaurantListPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

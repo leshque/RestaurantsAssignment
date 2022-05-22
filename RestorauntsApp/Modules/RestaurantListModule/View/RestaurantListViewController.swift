@@ -64,6 +64,7 @@ class RestaurantListViewController: UIViewController, RestaurantListViewProtocol
         setupView()
         layoutViews()
         presenter.viewDidLoad()
+        view.backgroundColor = .white
     }
     
     // MARK: Private Methods
@@ -84,7 +85,7 @@ class RestaurantListViewController: UIViewController, RestaurantListViewProtocol
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: footerView.topAnchor),
-            footerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            footerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             footerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             footerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])

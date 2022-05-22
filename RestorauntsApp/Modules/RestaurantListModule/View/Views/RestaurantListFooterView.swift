@@ -21,6 +21,7 @@ class RestaurantListFooterView: UIView, RestaurantListFooterViewProtocol {
     
     private lazy var sortByButton: UIButton = {
         let button = UIButton()
+        button.configuration = UIButton.Configuration.borderedTinted()
         button.addTarget(
             self,
             action: #selector(sortByTapped),

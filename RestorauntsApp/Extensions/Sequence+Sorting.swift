@@ -43,6 +43,25 @@ extension Sequence {
         }
     }
     
+    func sorted(
+        using sortConfigs: [SortConfig<Element>]
+    ) -> [Element] {
+        sorted { valueA, valueB in
+            for config in sortConfigs {
+                let result = config.descriptor.comparator(valueA, valueB)
+                switch result {
+                case .orderedSame:
+                    break
+                case .orderedAscending:
+                    return config.order == .ascending
+                case .orderedDescending:
+                    return config.order == .descending
+                }
+            }
+            return false
+        }
+    }
+    
 }
 
 extension Sequence {

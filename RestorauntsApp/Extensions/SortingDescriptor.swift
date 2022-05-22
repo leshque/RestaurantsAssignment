@@ -20,6 +20,13 @@ struct SortDescriptor<Value> {
     
 }
 
+struct SortConfig<Value> {
+    
+    let descriptor: SortDescriptor<Value>
+    let order: SortOrder
+    
+}
+
 extension SortDescriptor {
     
     static func keyPath<T: Comparable>(

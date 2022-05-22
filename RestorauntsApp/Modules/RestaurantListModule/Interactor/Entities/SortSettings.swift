@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct SortSettings<T: Comparable> {
+struct SortSettings {
     
-    let sortBy: KeyPath<Restaurant, T>
+    let sortBy: KeyPath<Restaurant, AnyComparable>
     let sortOrder: SortOrder
     
 }

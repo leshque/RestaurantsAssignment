@@ -16,9 +16,9 @@ protocol RestaurantListInteractorProtocol {
 //        completion: (Restaurants) -> Void
 //    )
   
-    func loadData<T: Comparable>(
+    func loadData(
         searchQuery: String,
-        sortSettings: SortSettings<T>,
+        sortSettings: SortSettings,
         completion: (Restaurants) -> Void
     )
 
@@ -33,9 +33,9 @@ class RestaurantListInteractor: RestaurantListInteractorProtocol {
         self.storageClient = storageClient
     }
     
-    func loadData<T: Comparable>(
+    func loadData(
         searchQuery: String,
-        sortSettings: SortSettings<T>,
+        sortSettings: SortSettings,
         completion: (Restaurants) -> Void
     ) {
         let restaurantsCodable = storageClient.getRestaurants()

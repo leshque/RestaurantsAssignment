@@ -93,7 +93,7 @@ class RestaurantListPresenter: RestaurantListPresenterProtocol {
     ) {
         interactor.loadData (
             searchQuery: query,
-            sortSettings: SortSettings(sortBy: (\.name), sortOrder: .ascending)
+            sortSettings: mapSortOption(sortOption)
         ) { restaurants in
             completion(restaurants)
         }
@@ -105,24 +105,7 @@ class RestaurantListPresenter: RestaurantListPresenterProtocol {
             onSortSelectTapped: onSortSelectTapped
         )
     }
-    
-    //    private func searchRepos(
-    //        query: String,
-    //        completion: (Result<RepositoriesDTO, Error>) -> ()
-    //    ) {
-    //        interactor.loadRepos(query: query) { [weak self] result in
-    //            guard let self = self else { return }
-    //            switch result {
-    //            case .success(let repsDTO):
-    //                let viewModel = self.viewModel(from: repsDTO)
-    //                self.view?.render(viewModel: viewModel)
-    //            case .failure(_):
-    //                let viewModel = self.errorViewModel()
-    //                self.view?.render(viewModel: viewModel)
-    //            }
-    //        }
-    //    }
-    
+        
 }
 
 extension RestaurantListPresenter {
@@ -142,29 +125,59 @@ extension RestaurantListPresenter {
 
 extension RestaurantListPresenter {
     
-//    private func mapSortOption(_ option: RestaurantListSortOption) -> SortSettings<T: Comparable> {
-//        switch option {
-//        case .alphabetic:
-//            return SortSettings(sortBy: (\.name), sortOrder: .ascending)
-//        case .bestMatch:
-//            return SortSettings(sortBy: (\.sortingValues.bestMatch), sortOrder: .descending)
-//        case .newest:
-//            return SortSettings(sortBy: (\.sortingValues.newest), sortOrder: .descending)
-//        case .ratingAverage:
-//            return SortSettings(sortBy: (\.sortingValues.ratingAverage), sortOrder: .descending)
-//        case .distanceAscending:
-//            return SortSettings(sortBy: (\.sortingValues.distance), sortOrder: .ascending)
-//        case .distanceDescending:
-//            return SortSettings(sortBy: (\.sortingValues.distance), sortOrder: .descending)
-//        case .popularity:
-//            return SortSettings(sortBy: (\.sortingValues.popularity), sortOrder: .descending)
-//        case .averageProductPrice:
-//            return SortSettings(sortBy: (\.sortingValues.averageProductPrice), sortOrder: .descending)
-//        case .deliveryCosts:
-//            return SortSettings(sortBy: (\.sortingValues.deliveryCosts), sortOrder: .descending)
-//        case .minCost:
-//            return SortSettings(sortBy: (\.sortingValues.minCost), sortOrder: .ascending)
-//        }
-//    }
+    private func mapSortOption(_ option: RestaurantListSortOption) -> SortSettings {
+        switch option {
+        case .alphabetic:
+            return SortSettings(
+                sortBy: (\.name.anyComparable),
+                sortOrder: .ascending
+            )
+        case .bestMatch:
+            return SortSettings(
+                sortBy: (\.sortingValues.bestMatch.anyComparable),
+                sortOrder: .descending
+            )
+        case .newest:
+            return SortSettings(
+                sortBy: (\.sortingValues.newest.anyComparable),
+                sortOrder: .descending
+            )
+        case .ratingAverage:
+            return SortSettings(
+                sortBy: (\.sortingValues.ratingAverage.anyComparable),
+                sortOrder: .descending
+            )
+        case .distanceAscending:
+            return SortSettings(
+                sortBy: (\.sortingValues.distance.anyComparable),
+                sortOrder: .ascending
+            )
+        case .distanceDescending:
+            return SortSettings(
+                sortBy: (\.sortingValues.distance.anyComparable),
+                sortOrder: .descending
+            )
+        case .popularity:
+            return SortSettings(
+                sortBy: (\.sortingValues.popularity.anyComparable),
+                sortOrder: .descending
+            )
+        case .averageProductPrice:
+            return SortSettings(
+                sortBy: (\.sortingValues.averageProductPrice.anyComparable),
+                sortOrder: .descending
+            )
+        case .deliveryCosts:
+            return SortSettings(
+                sortBy: (\.sortingValues.deliveryCosts.anyComparable),
+                sortOrder: .descending
+            )
+        case .minCost:
+            return SortSettings(
+                sortBy: (\.sortingValues.minCost.anyComparable),
+                sortOrder: .ascending
+            )
+        }
+    }
     
 }

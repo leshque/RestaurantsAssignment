@@ -37,6 +37,7 @@
 		688A0BFD283AABD50037D313 /* RestaurantListFooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688A0BFC283AABD50037D313 /* RestaurantListFooterViewModel.swift */; };
 		688A0C00283AAFCA0037D313 /* RestaurantListSortOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688A0BFF283AAFCA0037D313 /* RestaurantListSortOption.swift */; };
 		688A0C02283AB6950037D313 /* SortSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688A0C01283AB6950037D313 /* SortSettings.swift */; };
+		688A0C04283ACBBD0037D313 /* AnyComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688A0C03283ACBBC0037D313 /* AnyComparable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		688A0BFC283AABD50037D313 /* RestaurantListFooterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListFooterViewModel.swift; sourceTree = "<group>"; };
 		688A0BFF283AAFCA0037D313 /* RestaurantListSortOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListSortOption.swift; sourceTree = "<group>"; };
 		688A0C01283AB6950037D313 /* SortSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortSettings.swift; sourceTree = "<group>"; };
+		688A0C03283ACBBC0037D313 /* AnyComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyComparable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +284,7 @@
 			children = (
 				688A0BF6283A54600037D313 /* Sequence+Sorting.swift */,
 				688A0BF8283A58E90037D313 /* SortingDescriptor.swift */,
+				688A0C03283ACBBC0037D313 /* AnyComparable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				684C59F128394CEA00102994 /* Restaurant.swift in Sources */,
 				688A0BF2283A402C0037D313 /* RestaurantListViewModelMapper.swift in Sources */,
 				688A0BF9283A58E90037D313 /* SortingDescriptor.swift in Sources */,
+				688A0C04283ACBBD0037D313 /* AnyComparable.swift in Sources */,
 				684C59E328393C7E00102994 /* StorageClient.swift in Sources */,
 				40002A4185C7E7A405C8894C /* Router.swift in Sources */,
 			);

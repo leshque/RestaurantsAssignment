@@ -32,13 +32,7 @@ class RestaurantListTableCellView: UITableViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 12)
         return label
     }()
-    
-    private lazy var sortTitleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
+        
     private lazy var sortValueLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -76,7 +70,6 @@ class RestaurantListTableCellView: UITableViewCell {
         addSubview(stackView)
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(statusLabel)
-        stackView.addArrangedSubview(sortTitleLabel)
         stackView.addArrangedSubview(sortValueLabel)
     }
     
@@ -91,12 +84,11 @@ class RestaurantListTableCellView: UITableViewCell {
     
     func render(_ viewModel: RestaurantListCellViewModel) {
         titleLabel.text = viewModel.name
-        sortTitleLabel.text = viewModel.sortTitle
         sortValueLabel.text = viewModel.sortValue
         switch viewModel.status {
         case .open:
             statusLabel.text = "Open"
-            statusLabel.textColor = .green
+            statusLabel.textColor = .init(red: 0, green: 100/255, blue: 0, alpha: 1)
         case .orderAhead:
             statusLabel.text = "Order Ahead"
             statusLabel.textColor = .orange

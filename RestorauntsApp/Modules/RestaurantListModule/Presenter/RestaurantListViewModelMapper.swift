@@ -29,7 +29,7 @@ class RestaurantListViewModelMapper: RestaurantListViewModelMapperProtocol {
             sections: [
                 RestaurantListSectionViewModel(
                     items: restaurants.restaurants.map {
-                        self.mapRestaurant($0)
+                        self.mapRestaurant($0, sortOption: sortOption)
                     }
                 )
             ],
@@ -50,15 +50,21 @@ class RestaurantListViewModelMapper: RestaurantListViewModelMapperProtocol {
         )
     }
  
-    func mapRestaurant(_ restaurant: Restaurant) -> RestaurantListCellViewModel {
+    private func mapRestaurant(
+        _ restaurant: Restaurant,
+        sortOption: RestaurantListSortOption
+    ) -> RestaurantListCellViewModel {
         RestaurantListCellViewModel(
             name: restaurant.name,
             status: mapStatus(restaurant.status),
-            sortTitle: "Sort title?",
-            sortValue: "Sort value?")
+            sortValue: getResaturantValue(
+                from: restaurant,
+                for: sortOption
+            )
+        )
     }
     
-    func mapStatus(_ status: Restaurant.Status) -> RestaurantListCellViewModel.Status {
+    private func mapStatus(_ status: Restaurant.Status) -> RestaurantListCellViewModel.Status {
         switch status {
         case .open:
             return .open
@@ -68,5 +74,29 @@ class RestaurantListViewModelMapper: RestaurantListViewModelMapperProtocol {
             return .closed
         }
     }
-    
+ 
+    private func getResaturantValue(from restaurant: Restaurant, for sortOption: RestaurantListSortOption) -> String {
+        switch sortOption {
+        case .alphabetic:
+            return restaurant.name
+        case .bestMatch:
+            return "\(restaurant.sortingValues.bestMatch)"
+        case .newest:
+            return "\(restaurant.sortingValues.newest)"
+        case .ratingAverage:
+            return "\(restaurant.sortingValues.ratingAverage)"
+        case .distanceAscending:
+            return "\(restaurant.sortingValues.distance)"
+        case .distanceDescending:
+            return "\(restaurant.sortingValues.distance)"
+        case .popularity:
+            return "\(restaurant.sortingValues.popularity)"
+        case .averageProductPrice:
+            return "\(restaurant.sortingValues.averageProductPrice)"
+        case .deliveryCosts:
+            return "\(restaurant.sortingValues.deliveryCosts)"
+        case .minCost:
+            return "\(restaurant.sortingValues.minCost)"
+        }
+    }
 }

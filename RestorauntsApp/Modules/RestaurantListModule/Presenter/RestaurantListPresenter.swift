@@ -49,26 +49,21 @@ class RestaurantListPresenter: RestaurantListPresenterProtocol {
     lazy var onSortSelectTapped: () -> Void = { [weak self] in
         guard let self = self else { return }
         self.view?.presentSortSelector(
-            selectedOption: self.getCurrentSortOption(),
+            selectedOption: self.sortOption,
             options: RestaurantListSortOption.allCases,
             onSelect: { [weak self] sortOption in
                 guard let self = self else { return }
+                self.sortOption = sortOption
                 self.searchRestaurants(
-                    query: "",
+                    query: self.lastSearchQuery,
                     sortOption: sortOption,
                     completion: self.renderRestaurants
                 )
             }
         )
     }
-    
-    private func getCurrentSortOption() -> RestaurantListSortOption {
-        .bestMatch
-    }
-    
-    
+        
     func viewDidLoad() {
-//        view?.render(viewModel: initialViewModel())
         searchRestaurants(
             query: "",
             sortOption: sortOption,
@@ -77,7 +72,6 @@ class RestaurantListPresenter: RestaurantListPresenterProtocol {
     }
     
     private func renderRestaurants(_ restaurants: Restaurants) {
-        print("we've got some restaurants: \(restaurants.restaurants.count)")
         view?.render(
             viewModel: self.viewModelMapper.mapRestaurants(
                 restaurants,

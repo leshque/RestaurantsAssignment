@@ -44,5 +44,5 @@ enum RestaurantListSortOption: String, CaseIterable, Equatable {
             return "Minimum Order Cost"
         }
     }
-    
+
 }

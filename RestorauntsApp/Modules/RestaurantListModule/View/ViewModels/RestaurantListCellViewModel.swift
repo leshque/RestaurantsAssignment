@@ -14,7 +14,6 @@ struct RestaurantListCellViewModel {
     
     let name: String
     let status: Status
-    let sortTitle: String
     let sortValue: String
     
 }

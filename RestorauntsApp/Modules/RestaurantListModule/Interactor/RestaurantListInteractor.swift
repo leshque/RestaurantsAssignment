@@ -13,7 +13,7 @@ protocol RestaurantListInteractorProtocol {
         searchQuery: String,
         sortSettings: SortSettings,
         completion: (Restaurants) -> Void
-    )    
+    )
     
 }
 
@@ -45,6 +45,10 @@ class RestaurantListInteractor: RestaurantListInteractorProtocol {
                 SortConfig(
                     descriptor: .keyPath(sortSettings.sortBy),
                     order: sortSettings.sortOrder
+                ),
+                SortConfig(
+                    descriptor: .keyPath(\Restaurant.name),
+                    order: .ascending
                 )
             ]
         )

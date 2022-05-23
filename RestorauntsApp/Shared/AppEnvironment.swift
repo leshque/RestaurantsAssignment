@@ -13,5 +13,6 @@ class AppEnvironment {
 
     lazy var router: RouterProtocol = Router()
     lazy var storageClient: StorageClientProtocol = StorageClient()
+    lazy var settingsProvider: SettingsProviderProtocol = UserDefaultsSettingsProvider()
     
 }

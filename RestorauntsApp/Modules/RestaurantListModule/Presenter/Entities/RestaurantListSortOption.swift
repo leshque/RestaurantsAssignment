@@ -9,6 +9,8 @@ import Foundation
 
 enum RestaurantListSortOption: String, CaseIterable, Equatable {
     
+    static let `default`: RestaurantListSortOption = .bestMatch
+    
     case alphabetic
     case bestMatch
     case newest

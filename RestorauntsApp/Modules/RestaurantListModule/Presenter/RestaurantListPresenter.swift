@@ -50,7 +50,7 @@ class RestaurantListPresenter: RestaurantListPresenterProtocol {
         guard let self = self else { return }
         self.view?.presentSortSelector(
             selectedOption: self.sortOption,
-            options: RestaurantListSortOption.allCases,
+            options: self.sortOptions,
             onSelect: { [weak self] sortOption in
                 guard let self = self else { return }
                 self.sortOption = sortOption
@@ -62,8 +62,21 @@ class RestaurantListPresenter: RestaurantListPresenterProtocol {
             }
         )
     }
+    
+    lazy var sortOptions: [RestaurantListSortOption] = {
+        [
+            .bestMatch,
+            .distanceAscending,
+            .distanceDescending,
+            .alphabetic,
+            .ratingAverage,
+            .deliveryCosts,
+            .newest
+        ]
+    }()
         
     func viewDidLoad() {
+        sortOption = interactor.getSortOption()
         searchRestaurants(
             query: "",
             sortOption: sortOption,
@@ -86,7 +99,8 @@ class RestaurantListPresenter: RestaurantListPresenterProtocol {
         sortOption: RestaurantListSortOption,
         completion: (Restaurants) -> ()
     ) {
-        interactor.loadData (
+        interactor.saveSortOption(sortOption)
+        interactor.loadData(
             searchQuery: query,
             sortSettings: mapSortOption(sortOption)
         ) { restaurants in
@@ -105,7 +119,9 @@ class RestaurantListPresenter: RestaurantListPresenterProtocol {
 
 extension RestaurantListPresenter {
     
-    private func mapSortOption(_ option: RestaurantListSortOption) -> SortSettings {
+    private func mapSortOption(
+        _ option: RestaurantListSortOption
+    ) -> SortSettings {
         switch option {
         case .alphabetic:
             return SortSettings(

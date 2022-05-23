@@ -38,6 +38,7 @@
 		688A0C00283AAFCA0037D313 /* RestaurantListSortOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688A0BFF283AAFCA0037D313 /* RestaurantListSortOption.swift */; };
 		688A0C02283AB6950037D313 /* SortSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688A0C01283AB6950037D313 /* SortSettings.swift */; };
 		688A0C04283ACBBD0037D313 /* AnyComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688A0C03283ACBBC0037D313 /* AnyComparable.swift */; };
+		689C5258283BFC1D00F7243B /* SettingsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689C5257283BFC1D00F7243B /* SettingsProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		688A0BFF283AAFCA0037D313 /* RestaurantListSortOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListSortOption.swift; sourceTree = "<group>"; };
 		688A0C01283AB6950037D313 /* SortSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortSettings.swift; sourceTree = "<group>"; };
 		688A0C03283ACBBC0037D313 /* AnyComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyComparable.swift; sourceTree = "<group>"; };
+		689C5257283BFC1D00F7243B /* SettingsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 				684C59D82839181100102994 /* Storage */,
 				684C59DB2839183700102994 /* AppEnvironment.swift */,
 				40002A2745BA292145F1993C /* Router.swift */,
+				689C5257283BFC1D00F7243B /* SettingsProvider.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				684C59F328394D3F00102994 /* SortingValues.swift in Sources */,
+				689C5258283BFC1D00F7243B /* SettingsProvider.swift in Sources */,
 				6882F114283914FD003F64B4 /* AppDelegate.swift in Sources */,
 				688A0BF4283A40D00037D313 /* RestaurantListTableCellView.swift in Sources */,
 				688A0C00283AAFCA0037D313 /* RestaurantListSortOption.swift in Sources */,

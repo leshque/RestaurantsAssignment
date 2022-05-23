@@ -36,7 +36,10 @@ class RestaurantListModule: RestaurantListModuleProtocol {
     }
 
     func interactor() -> RestaurantListInteractorProtocol {
-        RestaurantListInteractor(storageClient: AppEnvironment.shared.storageClient)
+        RestaurantListInteractor(
+            storageClient: AppEnvironment.shared.storageClient,
+            settingsProvider: AppEnvironment.shared.settingsProvider
+        )
     }
     
 }

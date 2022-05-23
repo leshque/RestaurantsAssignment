@@ -15,14 +15,22 @@ protocol RestaurantListInteractorProtocol {
         completion: (Restaurants) -> Void
     )
     
+    func saveSortOption(_ option: RestaurantListSortOption)
+    func getSortOption() -> RestaurantListSortOption
+    
 }
 
 class RestaurantListInteractor: RestaurantListInteractorProtocol {
     
     let storageClient: StorageClientProtocol
+    let settingsProvider: SettingsProviderProtocol
     
-    init(storageClient: StorageClientProtocol) {
+    init(
+        storageClient: StorageClientProtocol,
+        settingsProvider: SettingsProviderProtocol
+    ) {
         self.storageClient = storageClient
+        self.settingsProvider = settingsProvider
     }
     
     func loadData(
@@ -55,6 +63,14 @@ class RestaurantListInteractor: RestaurantListInteractorProtocol {
         completion(Restaurants(restaurants: restaurantsFiltered))
     }
     
+    func saveSortOption(_ option: RestaurantListSortOption) {
+        settingsProvider.setCurrentSortingOption(option)
+    }
+    
+    func getSortOption() -> RestaurantListSortOption {
+        settingsProvider.getCurrentSortingOption()
+    }
+
 }
 
 extension RestaurantListInteractor {

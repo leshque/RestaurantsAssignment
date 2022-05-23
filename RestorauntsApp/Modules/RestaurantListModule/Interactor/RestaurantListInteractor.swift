@@ -35,7 +35,7 @@ class RestaurantListInteractor: RestaurantListInteractorProtocol {
             codable: restaurantsCodable
         )
         let restaurantsFiltered = restaurantsDTO.restaurants.filter {
-            searchQuery == "" ? true : $0.name.contains(searchQuery)
+            searchQuery == "" ? true : $0.name.localizedCaseInsensitiveContains(searchQuery)
         }.sorted(
             using: [
                 SortConfig(

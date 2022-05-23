@@ -25,9 +25,10 @@ class RestaurantListViewController: UIViewController, RestaurantListViewProtocol
     // MARK: UI
     
     lazy var tableView: UITableView = {
-        let view = UITableView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.keyboardDismissMode = .onDrag
+        return tableView
     }()
     
     lazy var searchBar: UISearchBar = {
@@ -141,5 +142,8 @@ extension RestaurantListViewController: UISearchBarDelegate {
         onSearch(searchText)
     }
     
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
 }
 

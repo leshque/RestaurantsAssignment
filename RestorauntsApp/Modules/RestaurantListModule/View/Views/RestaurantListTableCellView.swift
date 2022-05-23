@@ -68,6 +68,7 @@ class RestaurantListTableCellView: UITableViewCell {
     
     private func setupView() {
         backgroundColor = .white
+        selectionStyle = .none
         addSubview(stackView)
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(statusLabel)

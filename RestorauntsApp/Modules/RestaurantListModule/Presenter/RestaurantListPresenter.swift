@@ -46,24 +46,27 @@ class RestaurantListPresenter: RestaurantListPresenterProtocol {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: searchWorkItem)
     }
     
+    lazy var onSortSelected: (RestaurantListSortOption) -> Void = {
+         [weak self] sortOption in
+            guard let self = self else { return }
+            self.sortOption = sortOption
+            self.searchRestaurants(
+                query: self.lastSearchQuery,
+                sortOption: sortOption,
+                completion: self.renderRestaurants
+            )
+    }
+    
     lazy var onSortSelectTapped: () -> Void = { [weak self] in
         guard let self = self else { return }
         self.view?.presentSortSelector(
             selectedOption: self.sortOption,
             options: self.sortOptions,
-            onSelect: { [weak self] sortOption in
-                guard let self = self else { return }
-                self.sortOption = sortOption
-                self.searchRestaurants(
-                    query: self.lastSearchQuery,
-                    sortOption: sortOption,
-                    completion: self.renderRestaurants
-                )
-            }
+            onSelect: self.onSortSelected
         )
     }
     
-    lazy var sortOptions: [RestaurantListSortOption] = {
+    private lazy var sortOptions: [RestaurantListSortOption] = {
         [
             .bestMatch,
             .distanceAscending,

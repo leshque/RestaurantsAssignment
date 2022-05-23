@@ -97,23 +97,23 @@ class RestaurantListViewModelMapper: RestaurantListViewModelMapperProtocol {
         case .alphabetic:
             return nil
         case .bestMatch:
-            return "\(restaurant.sortingValues.bestMatch)"
+            return "Best match: \(restaurant.sortingValues.bestMatch)"
         case .newest:
-            return "\(restaurant.sortingValues.newest)"
+            return "Newest: \(restaurant.sortingValues.newest)"
         case .ratingAverage:
-            return "\(restaurant.sortingValues.ratingAverage)"
+            return "Average rating: \(restaurant.sortingValues.ratingAverage)"
         case .distanceAscending:
-            return formatDistance(restaurant.sortingValues.distance)
+            return "Distance: \(formatDistance(restaurant.sortingValues.distance))"
         case .distanceDescending:
-            return formatDistance(restaurant.sortingValues.distance)
+            return "Distance: \(formatDistance(restaurant.sortingValues.distance))"
         case .popularity:
-            return "\(restaurant.sortingValues.popularity)"
+            return "Popularity: \(restaurant.sortingValues.popularity)"
         case .averageProductPrice:
-            return formatPrice(restaurant.sortingValues.averageProductPrice)
+            return "Average Product Price:  \(formatPrice(restaurant.sortingValues.averageProductPrice))"
         case .deliveryCosts:
-            return formatPrice(restaurant.sortingValues.deliveryCosts)
+            return "Delivery Cost:  \(formatPrice(restaurant.sortingValues.deliveryCosts))"
         case .minCost:
-            return formatPrice(restaurant.sortingValues.minCost)
+            return "Minimal Order: \(formatPrice(restaurant.sortingValues.minCost))"
         }
     }
     

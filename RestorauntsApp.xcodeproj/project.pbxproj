@@ -39,6 +39,7 @@
 		688A0C02283AB6950037D313 /* SortSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688A0C01283AB6950037D313 /* SortSettings.swift */; };
 		688A0C04283ACBBD0037D313 /* AnyComparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688A0C03283ACBBC0037D313 /* AnyComparable.swift */; };
 		689C5258283BFC1D00F7243B /* SettingsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689C5257283BFC1D00F7243B /* SettingsProvider.swift */; };
+		689C525A283C224400F7243B /* RestaurantListDomainModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689C5259283C224300F7243B /* RestaurantListDomainModelMapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		688A0C01283AB6950037D313 /* SortSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortSettings.swift; sourceTree = "<group>"; };
 		688A0C03283ACBBC0037D313 /* AnyComparable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyComparable.swift; sourceTree = "<group>"; };
 		689C5257283BFC1D00F7243B /* SettingsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsProvider.swift; sourceTree = "<group>"; };
+		689C5259283C224300F7243B /* RestaurantListDomainModelMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListDomainModelMapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +218,7 @@
 			children = (
 				684C59ED28394CB000102994 /* Entities */,
 				684C59E028393C3C00102994 /* RestaurantListInteractor.swift */,
+				689C5259283C224300F7243B /* RestaurantListDomainModelMapper.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				684C59DC2839183700102994 /* AppEnvironment.swift in Sources */,
 				400028502117CD602DD89092 /* RestaurantListPresenter.swift in Sources */,
 				40002A9BD2EBF703143555C0 /* RestaurantListDataSource.swift in Sources */,
+				689C525A283C224400F7243B /* RestaurantListDomainModelMapper.swift in Sources */,
 				684C59E128393C3C00102994 /* RestaurantListInteractor.swift in Sources */,
 				400029CD8B9F276F9A461D83 /* RestaurantListViewController.swift in Sources */,
 				688A0BFB283AA88C0037D313 /* RestaurantListFooterView.swift in Sources */,

@@ -24,13 +24,16 @@ class RestaurantListInteractor: RestaurantListInteractorProtocol {
     
     let storageClient: StorageClientProtocol
     let settingsProvider: SettingsProviderProtocol
+    let domainModelMapper: RestaurantListDomainModelMapperProtocol
     
     init(
         storageClient: StorageClientProtocol,
-        settingsProvider: SettingsProviderProtocol
+        settingsProvider: SettingsProviderProtocol,
+        domainModelMapper: RestaurantListDomainModelMapperProtocol
     ) {
         self.storageClient = storageClient
         self.settingsProvider = settingsProvider
+        self.domainModelMapper = domainModelMapper
     }
     
     func loadData(
@@ -39,7 +42,7 @@ class RestaurantListInteractor: RestaurantListInteractorProtocol {
         completion: (Restaurants) -> Void
     ) {
         let restaurantsCodable = storageClient.getRestaurants()
-        let restaurantsDTO = mapRestaurants(
+        let restaurantsDTO = domainModelMapper.mapRestaurants(
             codable: restaurantsCodable
         )
         let restaurantsFiltered = restaurantsDTO.restaurants.filter {
@@ -71,51 +74,4 @@ class RestaurantListInteractor: RestaurantListInteractorProtocol {
         settingsProvider.getCurrentSortingOption()
     }
 
-}
-
-extension RestaurantListInteractor {
-    
-    // Codable -> DTO mapping
-    
-    private func mapRestaurants(codable: RestaurantsCodable) -> Restaurants {
-        Restaurants(
-            restaurants: codable.restaurants.map {
-                mapRestaurant(codable: $0)
-            }
-        )
-    }
-    
-    private func mapRestaurant(codable: RestaurantCodable) -> Restaurant {
-        Restaurant(
-            name: codable.name,
-            status: mapStatus(codableStatus: codable.status),
-            sortingValues: mapSortingValues(codable: codable.sortingValues)
-        )
-    }
-    
-    private func mapSortingValues(codable: SortingValuesCodable) -> Restaurant.SortingValues {
-        Restaurant.SortingValues(
-            bestMatch: codable.bestMatch,
-            newest: codable.newest,
-            ratingAverage: codable.ratingAverage,
-            distance: codable.distance,
-            popularity: codable.popularity,
-            averageProductPrice: codable.averageProductPrice,
-            deliveryCosts: codable.deliveryCosts,
-            minCost: codable.minCost
-        )
-    }
-    
-    private func mapStatus(codableStatus: RestaurantCodable.Status) -> Restaurant.Status {
-        switch codableStatus {
-        case .open:
-            return Restaurant.Status.open
-        case .closed:
-            return Restaurant.Status.closed
-        case .orderAhead:
-            return Restaurant.Status.orderAhead
-        }
-    }
-    
-    
 }

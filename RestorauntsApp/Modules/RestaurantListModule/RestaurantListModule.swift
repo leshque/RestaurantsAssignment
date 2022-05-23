@@ -38,10 +38,9 @@ class RestaurantListModule: RestaurantListModuleProtocol {
     func interactor() -> RestaurantListInteractorProtocol {
         RestaurantListInteractor(
             storageClient: AppEnvironment.shared.storageClient,
-            settingsProvider: AppEnvironment.shared.settingsProvider
+            settingsProvider: AppEnvironment.shared.settingsProvider,
+            domainModelMapper: RestaurantListDomainModelMapper()
         )
     }
     
 }
-
-

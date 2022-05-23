@@ -89,6 +89,7 @@ class RestaurantListTableCellView: UITableViewCell {
     func render(_ viewModel: RestaurantListCellViewModel) {
         titleLabel.text = viewModel.name
         sortValueLabel.text = viewModel.sortValue
+        sortValueLabel.isHidden = viewModel.sortValue == nil 
         switch viewModel.status {
         case .open:
             statusLabel.text = "Open"

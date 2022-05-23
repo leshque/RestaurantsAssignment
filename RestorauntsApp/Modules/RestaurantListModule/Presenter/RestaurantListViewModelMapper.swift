@@ -19,6 +19,23 @@ protocol RestaurantListViewModelMapperProtocol {
 
 class RestaurantListViewModelMapper: RestaurantListViewModelMapperProtocol {
     
+    private lazy var currencyFormatter: NumberFormatter = {
+        let currencyFormatter = NumberFormatter()
+        currencyFormatter.usesGroupingSeparator = true
+        currencyFormatter.numberStyle = .currency
+        currencyFormatter.minimumFractionDigits = 1
+        // localize to your grouping and decimal separator
+        currencyFormatter.locale = Locale.init(identifier: "de_DE")
+        return currencyFormatter
+    }()
+    
+    private lazy var measurementFormatter: MeasurementFormatter = {
+        let measurementFormatter = MeasurementFormatter()
+        measurementFormatter.locale = Locale.init(identifier: "de_DE")
+        measurementFormatter.numberFormatter.maximumFractionDigits = 1
+        return measurementFormatter
+    }()
+    
     func mapRestaurants(
         _ restaurants: Restaurants,
         actions: RestaurantListActions,
@@ -75,10 +92,10 @@ class RestaurantListViewModelMapper: RestaurantListViewModelMapperProtocol {
         }
     }
  
-    private func getResaturantValue(from restaurant: Restaurant, for sortOption: RestaurantListSortOption) -> String {
+    private func getResaturantValue(from restaurant: Restaurant, for sortOption: RestaurantListSortOption) -> String? {
         switch sortOption {
         case .alphabetic:
-            return restaurant.name
+            return nil
         case .bestMatch:
             return "\(restaurant.sortingValues.bestMatch)"
         case .newest:
@@ -86,17 +103,26 @@ class RestaurantListViewModelMapper: RestaurantListViewModelMapperProtocol {
         case .ratingAverage:
             return "\(restaurant.sortingValues.ratingAverage)"
         case .distanceAscending:
-            return "\(restaurant.sortingValues.distance)"
+            return formatDistance(restaurant.sortingValues.distance)
         case .distanceDescending:
-            return "\(restaurant.sortingValues.distance)"
+            return formatDistance(restaurant.sortingValues.distance)
         case .popularity:
             return "\(restaurant.sortingValues.popularity)"
         case .averageProductPrice:
-            return "\(restaurant.sortingValues.averageProductPrice)"
+            return formatPrice(restaurant.sortingValues.averageProductPrice)
         case .deliveryCosts:
-            return "\(restaurant.sortingValues.deliveryCosts)"
+            return formatPrice(restaurant.sortingValues.deliveryCosts)
         case .minCost:
-            return "\(restaurant.sortingValues.minCost)"
+            return formatPrice(restaurant.sortingValues.minCost)
         }
+    }
+    
+    private func formatPrice(_ price: Restaurant.SortingValues.Price) -> String {
+        currencyFormatter.string(from: NSNumber(value: price / 100)) ?? ""
+    }
+    
+    private func formatDistance(_ distance: Restaurant.SortingValues.Distance) -> String {
+        let measurement = Measurement(value: Double(distance), unit: UnitLength.meters).converted(to: .kilometers)
+        return measurementFormatter.string(from: measurement)
     }
 }

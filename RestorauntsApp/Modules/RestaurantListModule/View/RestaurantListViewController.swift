@@ -71,10 +71,7 @@ class RestaurantListViewController: UIViewController, RestaurantListViewProtocol
     // MARK: Private Methods
     
     private func setupView() {
-        tableView.delegate = dataSource
-        tableView.dataSource = dataSource
         searchBar.delegate = self
-        
         view.addSubview(tableView)
         view.addSubview(footerView)
         navigationItem.titleView = searchBar

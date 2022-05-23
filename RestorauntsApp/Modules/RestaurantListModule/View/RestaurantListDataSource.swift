@@ -4,7 +4,7 @@
 
 import UIKit
 
-protocol RestaurantListDataSourceProtocol: UITableViewDataSource, UITableViewDelegate {
+protocol RestaurantListDataSourceProtocol {
 
     func render(tableView: UITableView, sections: [RestaurantListSectionViewModel])
 
@@ -14,35 +14,49 @@ class RestaurantListDataSource: NSObject, RestaurantListDataSourceProtocol {
 
     private var sections: [RestaurantListSectionViewModel] = [RestaurantListSectionViewModel]()
     private var tableView: UITableView?
-
+    private var dataSource:  UITableViewDiffableDataSource<Section, RestaurantListCellViewModel>?
+    
     func render(tableView: UITableView, sections: [RestaurantListSectionViewModel]) {
         self.sections = sections
         self.tableView = tableView
         tableView.register(RestaurantListTableCellView.self, forCellReuseIdentifier: RestaurantListTableCellView.reuseIdentifier)
-        tableView.dataSource = self
-        tableView.reloadData()
-
-    }
-
-    // MARK: UITableViewDataSource
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        sections[section].items.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: RestaurantListTableCellView.reuseIdentifier) as? RestaurantListTableCellView else {
-            return UITableViewCell()
+        if (dataSource == nil) {
+            dataSource = makeDataSource(tableView: tableView)
+            tableView.dataSource = dataSource
         }
-        cell.render(sections[indexPath.section].items[indexPath.row]) 
-        return cell
+        update(with: sections, animate: true)
     }
 
-    // MARK: UITableViewDelegate
+}
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let viewModel = sections[indexPath.section].items[indexPath.row]
-        //viewModel.onTap
+extension RestaurantListDataSource {
+
+    enum Section: Hashable {
+        case firstSection
     }
-
+    
+    func makeDataSource(tableView: UITableView) -> UITableViewDiffableDataSource<Section, RestaurantListCellViewModel> {
+        let dataSource = UITableViewDiffableDataSource<Section, RestaurantListCellViewModel>(
+            tableView: tableView,
+            cellProvider: {  tableView, indexPath, cellViewModel in
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: RestaurantListTableCellView.reuseIdentifier) as? RestaurantListTableCellView else {
+                    return UITableViewCell()
+                }
+                cell.render(cellViewModel)
+                return cell
+            }
+        )
+        dataSource.defaultRowAnimation = .fade
+        return dataSource
+    }
+    
+    func update(with sections: [RestaurantListSectionViewModel], animate: Bool = true) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, RestaurantListCellViewModel>()
+        snapshot.appendSections([.firstSection])
+        if !sections.isEmpty {
+            snapshot.appendItems(sections[0].items, toSection: .firstSection)
+        }
+        dataSource?.apply(snapshot, animatingDifferences: animate)
+    }
+    
 }

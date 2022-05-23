@@ -4,16 +4,22 @@
 
 import Foundation
 
-struct RestaurantListCellViewModel {
+struct RestaurantListCellViewModel: Hashable {
     
     enum Status {
+        
         case open
         case orderAhead
         case closed
+        
     }
     
     let name: String
     let status: Status
-    let sortValue: String
+    let sortValue: String?
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(name)
+    }
     
 }

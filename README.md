@@ -1,4 +1,4 @@
-# TakeawayAssignment
+# RestaurantsAssignment
 
 The project is implemented using VIPER architecture.
 
